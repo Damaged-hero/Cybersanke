@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyberpunk Snakes & Ladders — Endless</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- First-time intro -->
+  <div id="introModal" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Welcome">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">WELCOME, RUNNER</div>
+        <div class="modal-sub">Cyberpunk Snakes &amp; Ladders — Endless</div>
+      </div>
+      <div class="modal-body">
+        <ul class="modal-list">
+          <li><b>Endless track:</b> the 10×10 grid is just your forward window.</li>
+          <li><b>Points:</b> +1 for every tile you walk.</li>
+          <li><b>Multipliers:</b> land on <span class="chip m2">×2</span> / <span class="chip m3">×3</span> to boost that step.</li>
+          <li><b>Ladders:</b> jump ahead <i>+5…20</i> with a chunky bonus.</li>
+          <li><b>Snakes:</b> back to start.</li>
+          <li><b>Death Traps:</b> lose a life and go back to start.</li>
+          <li><b>3 lives:</b> chase the highest score you can.</li>
+        </ul>
+
+        <div class="modal-form">
+          <label for="username" class="modal-label">Choose a username</label>
+          <input id="username" class="modal-input" type="text" maxlength="20" placeholder="e.g. neon_ronin" autocomplete="off" />
+          <label class="modal-accept">
+            <input id="accept" type="checkbox" />
+            <span>I accept the neon challenge.</span>
+          </label>
+          <button id="startBtn" class="modal-btn" disabled>Enter the Grid</button>
+        </div>
+      </div>
+      <div class="modal-foot">Hotkeys: <b>R</b> to roll, <b>N</b> to restart.</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hud">
+      <h1 class="title">Cyberpunk Snakes & Ladders — Endless</h1>
+      <p class="subtitle">Go as far as you can. Earn points. Avoid death traps. Snakes reset you; ladders rocket you ahead.</p>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT: big scrolling window of the endless board -->
+      <section class="panel hero-left">
+        <div class="tracker-head">Map tracker</div>
+        <div class="legend">
+          <span class="lg it-normal">Normal</span>
+          <span class="lg it-m2">×2</span>
+          <span class="lg it-m3">×3</span>
+          <span class="lg it-ladder">Ladder</span>
+          <span class="lg it-snake">Snake</span>
+          <span class="lg it-trap">Trap</span>
+        </div>
+        <div class="mini hero">
+          <div id="miniGrid" class="mini-grid hero" aria-label="Endless map window"></div>
+        </div>
+      </section>
+
+      <!-- RIGHT: player info, controls, log, warrior picker, leaderboard -->
+      <aside class="panel side">
+        <div class="player">
+          <div>Player: <b id="playerName">—</b></div>
+          <div class="best">Best: <b id="bestScore">0</b></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><span class="dot"></span><div>Position: <b id="pos">1</b></div></div>
+          <div class="stat"><span class="dot" style="background:var(--neon3); box-shadow:0 0 8px var(--neon3)"></span><div>Last roll: <b id="last">–</b></div></div>
+          <div class="stat"><span class="dot score"></span><div>Points: <b id="points">0</b></div></div>
+          <div class="stat"><span class="dot lives"></span><div>Lives: <b id="lives">3</b></div></div>
+        </div>
+
+        <div class="btns">
+          <button id="rollBtn" class="roll">Roll Dice</button>
+          <button id="restart" class="roll alt">Restart</button>
+        </div>
+
+        <div class="dice-row">
+          <div id="dice" class="dice" title="Click to roll">
+            <div class="pips" aria-hidden="true"></div>
+          </div>
+          <div class="dice-help">Tap dice or press <b>R</b> to roll.</div>
+        </div>
+
+        <div class="log" id="log" aria-live="polite"></div>
+
+        <div class="warriors">
+          <div class="war-head">Choose your warrior</div>
+          <div id="warGrid" class="war-grid" aria-label="Warrior selection"></div>
+          <div class="war-selected">Selected: <b id="warName">Neon Ronin</b></div>
+        </div>
+
+        <!-- NEW: Local Leaderboard -->
+        <div class="leaderboard">
+          <div class="lb-head">
+            <div class="lb-title">Local Leaderboard</div>
+            <button id="clearLB" class="lb-clear" title="Clear leaderboard">Clear</button>
+          </div>
+          <ol id="lbList" class="lb-list" aria-label="Top scores"></ol>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer"><div class="credit">Endless mode • Procedural map • Vanilla HTML/CSS/JS</div></footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
